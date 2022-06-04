@@ -1,0 +1,206 @@
+{% extends "base2.html" %}
+
+{% block title %}笑购物网首页{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static',filename='images/small.ico') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/normalize1.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/base.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/index1.css') }}"/>
+    <script src="/static/js/jquery-1.12.4.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+
+
+   <!--奶粉-->
+    <div class="danpin center">
+        <div class="biaoti center">奶粉产品</div>
+        <div class="main center">
+
+            <div class="mingxing fl">
+                <div class="sub_mingxing"><a href="{{ url_for('qa.commodity_detail',commodity_id='7')}}"><img src="/static/images/atm/atm1.jpg" alt=""></a></div>
+                <div class="pinpai"><a href="{{ url_for('qa.commodity_detail',commodity_id='7')}}">爱他美奶粉</a></div>
+                <div class="youhui">5月9日-10日，下单立减200元</div>
+                <div class="jiage"> 365.00元</div>
+            </div>
+            <div class="mingxing fl">
+                <div class="sub_mingxing"><a href="{{ url_for('qa.commodity_detail',commodity_id='8')}}"><img src="/static/images/meisu/meis1.jpg" alt=""></a>
+                </div>
+                <div class="pinpai"><a href="{{ url_for('qa.commodity_detail',commodity_id='8')}}">美素佳儿奶粉</a></div>
+                <div class="youhui">5月9日-10日，下单立减100元</div>
+                <div class="jiage">376.00元</div>
+            </div>
+            <div class="mingxing fl">
+                <div class="sub_mingxing"><a href="{{ url_for('qa.commodity_detail',commodity_id='9')}}"><img src="/static/images/meizanc/mzc1.jpg" alt=""></a></div>
+                <div class="pinpai"><a href="{{ url_for('qa.commodity_detail',commodity_id='9')}}">美赞臣奶粉</a></div>
+                <div class="youhui">5月9日，下单立减200元</div>
+                <div class="jiage"> 2312.00元</div>
+            </div>
+            <div class="mingxing fl">
+                <div class="sub_mingxing"><a href="{{ url_for('qa.commodity_detail',commodity_id='10')}}"><img src="/static/images/huishi/huis1.jpg" alt=""></a></div>
+                <div class="pinpai"><a href="{{ url_for('qa.commodity_detail',commodity_id='10')}}">惠氏奶粉</a></div>
+                <div class="youhui">更轻更薄，像杂志一样随身携带</div>
+                <div class="jiage">1871.00元</div>
+            </div>
+            <div class="mingxing fl">
+                <div class="sub_mingxing"><a href="{{ url_for('qa.commodity_detail',commodity_id='11')}}"><img src="/static/images/feih/feih1.jpg" alt=""></a></div>
+                <div class="pinpai"><a href="{{ url_for('qa.commodity_detail',commodity_id='11')}}">飞鹤奶粉</a></div>
+                <div class="youhui">更轻更薄，像杂志一样随身携带</div>
+                <div class="jiage">357.00元</div>
+            </div>
+            <div class="mingxing fl">
+                <div class="sub_mingxing"><a href="{{ url_for('qa.commodity_detail',commodity_id='12')}}"><img src="/static/images/quec/quec1.jpg" alt=""></a>
+                </div>
+                <div class="pinpai"><a href="{{ url_for('qa.commodity_detail',commodity_id='12')}}">雀巢奶粉</a></div>
+                <div class="youhui">5月9日-21日享花呗12期分期免息</div>
+                <div class="jiage">298.00元</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer %}
+    <!--  footer start -->
+    <footer>
+        <div class="footer-top">
+            <ul>
+                <li><span class="pic-duo"></span>品类齐全，轻松购物</li>
+                <li><span class="pic-kuai"></span>多仓直发，极速配送</li>
+                <li><span class="pic-hao"></span>正品行货，精致服务</li>
+                <li><span class="pic-shen"></span>天天低价，畅选无忧</li>
+            </ul>
+        </div>
+        <div class="w footer-help">
+            <div class="help-nav">
+                <h5>购物指南</h5>
+                <ul>
+                    <li><a href="">购物流程</a></li>
+                    <li><a href="">会员介绍</a></li>
+                    <li><a href="">生活旅行</a></li>
+                    <li><a href="">常见问题</a></li>
+                    <li><a href="">大家电</a></li>
+                    <li><a href="">联系客服</a></li>
+                </ul>
+            </div>
+            <div class="help-nav">
+                <h5>配送方式</h5>
+                <ul>
+                    <li><a href="">上门自提</a></li>
+                    <li><a href="">211限时达</a></li>
+                    <li><a href="">配送服务查询</a></li>
+                    <li><a href="">配送费收取标准</a></li>
+                    <li><a href="">海外配送</a></li>
+                </ul>
+            </div>
+            <div class="help-nav">
+                <h5>支付方式</h5>
+                <ul>
+                    <li><a href="">货到付款</a></li>
+                    <li><a href="">在线支付</a></li>
+                    <li><a href="">分期付款</a></li>
+                    <li><a href="">邮局汇款</a></li>
+                    <li><a href="">公司转账</a></li>
+                </ul>
+            </div>
+            <div class="help-nav">
+                <h5>售后服务</h5>
+                <ul>
+                    <li><a href="">售后政策</a></li>
+                    <li><a href="">价格保护</a></li>
+                    <li><a href="">退款说明</a></li>
+                    <li><a href="">返修/退换货</a></li>
+                    <li><a href="">取消订单</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="w">
+            <div class="about">
+                <ul>
+                    <li><a href="">关于我们</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">联系我们</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">联系客服</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">合作招商</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">商家帮助</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">营销中心</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">手机京东</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">友情链接</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">销售联盟</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">京东社区</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">风险监测</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">隐私政策</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">京东公益</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">English</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">Site</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">Media & IR</a></li>
+                </ul>
+                <ul class="about-ppo">
+                    <li>京公网安备 11000002000088号</li>
+                    <li class="help-space"></li>
+                    <li><a href="">京ICP证070359号</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">网药品信息服务资格证编号(京)-经营性-2014-0008</a></li>
+                    <li class="help-space"></li>
+                    <li>新出发京零 字第大120007号</li>
+                </ul>
+                <ul class="about-ppo">
+                    <li>互联网出版许可证编号新出网证(京)字150号</li>
+                    <li class="help-space"></li>
+                    <li><a href="">出版物经营许可证</a></li>
+                    <li class="help-space"></li>
+                    <li><a href="">网络文化经营许可证京网文[2014]2148-348号</a></li>
+                    <li class="help-space"></li>
+                    <li>违法和不良信息举报电话：4006561155</li>
+                </ul>
+                <ul class="about-ppo">
+                    <li>Copyright © 2004 - 2020 京东JD.com 版权所有</li>
+                    <li class="help-space"></li>
+                    <li>消费者维权热线：4006067733 <a href="">经营证照</a></li>
+                    <li class="help-space"></li>
+                    <li>(京)网械平台备字(2018)第00003号</li>
+                    <li class="help-space"></li>
+                    <li><a href="">营业执照</a></li>
+                </ul>
+                <p class="font-icon">
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href=""></a>
+
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .copyrights {
+            text-indent: -9999px;
+            height: 0;
+            line-height: 0;
+            font-size: 0;
+            overflow: hidden;
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+词 云图
+说 wordcloud   之前 我们 要 先 了解 一个 名词 ， 词 云图   ， 什么 是 词 云图 呢 ？
+
+
+
+词 云图 ， 也 叫 文字 云 ， 是 对 文本 中 出现 频率 较 高 的 “ 关键词 ” 予以 视觉 化 的 展现 ， 词 云图 过滤 掉 大量 的 低频 低质 的 文本 信息 ， 使得 浏览者 只要 一眼 扫 过 文本 就 可 领略 文本 的 主旨 。
+
+
+
+
+
+
+
+
+
+
+
+
+
+WordCloud
+WordCloud   是 一款 python 环境 下 的 词 云图 工具包 ， 同时 支持 python2 和 python3 ， 能 通过 代码 的 形式 把 关键词 数据 转换成 直观 且 有趣 的 图文 模式 。
+
+
+
+安装
+
+
+pip 默认 安装 方式
+
+pip   install   wordcloud
+如果 是 使用 conda 的 方式 安装 ， 则 使用 以下 命令 安装
+
+conda   install   - c   conda - forge   wordcloud
+wordcloud 输入 第三方 安装包 ， 也 可以 下载 whl 文件 到 本地 然后 本地 安装
+
+
+
+1 、 先 检查 自己 使用 的 python 是 哪个 版本 的
+
+python   -- version
+
+Python   3.7 . 1
+2 、 打开 非正式 第三方 whl 文件 包 的 网站     https : / / www . lfd . uci . edu / ~ gohlke / pythonlibs /       ， 下载 对应 版本 的 安装包 ， 我 这里 是 python3.7 的 windows 版本 ， 所以 选择 最后 一个
+
+image . png
+
+
+
+3 、 下载 完成 以后 打开 cmd ， 用 pip 安装 wheel   执行命令
+
+pip   install   wheel
+4 、 cmd 切换 到 刚才 下载 的   wordcloud - 1.5 . 0 - cp37 - cp37m - win _ amd64 . whl       目录 ， 然后 执行命令
+
+
+
+pip   install   wordcloud - 1.5 . 0 - cp37 - cp37m - win _ amd64 . whl
+
+
+
+
+
+
+如图 ， 证明 安装 成功
+
+
+
+使用 方法
+
+
+简单 实例 讲解 ：
+
+
+
+with   open ( " tmp / tag . txt " ,   encoding = " utf - 8 " )   as   file :
+#   数据文件
+txt   =   file . read ( )
+#   如果 数据文件 中 包含 的 有 中文 的话 ， font _ path 必须 指定 字体 ， 否则 中文 会 乱码
+#   collocations ： 是否 包括 两个 词 的 搭配 ， 默认 为 True ， 如果 为 true 的 时候 会 有
+#   重复 的 数据 ， 这里 我 不 需要 重复 数据 ， 所以 设置 为 False
+#   width   幕布 的 宽度 ， height   幕布 的 高度
+#   max _ words   要 显示 的 词 的 最大 个数
+#   generate   读取 文本文件
+wordcloud   =   WordCloud ( font _ path = " C : / Windows / Fonts / simfang . ttf " ,
+collocations = False ,
+background _ color = " black " ,
+width = 800 ,
+height = 600 ,
+max _ words = 100 ) . generate ( txt )
+#   生成 图片
+image   =   wordcloud . to _ image ( )
+#   展示 图片
+image . show ( )
+#   写入 文件
+wordcloud . to _ file ( " tmp / tag . jpg " )
+
+
+更 多 官方 示例 讲解
+
+
+
+https : / / github . com / amueller / word _ cloud / blob / master / examples / a _ new _ hope . py

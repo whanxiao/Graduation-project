@@ -1,0 +1,101 @@
+词云图
+说wordcloud 之前我们要先了解一个名词，词云图 ，什么是词云图呢？
+
+ 
+
+词云图，也叫文字云，是对文本中出现频率较高的“关键词”予以视觉化的展现，词云图过滤掉大量的低频低质的文本信息，使得浏览者只要一眼扫过文本就可领略文本的主旨。
+
+ 
+
+
+
+ 
+
+
+
+
+
+ 
+
+WordCloud
+WordCloud 是一款python环境下的词云图工具包，同时支持python2和python3，能通过代码的形式把关键词数据转换成直观且有趣的图文模式。
+
+ 
+
+安装
+ 
+
+pip默认安装方式
+
+pip install wordcloud
+如果是使用conda的方式安装，则使用以下命令安装
+
+conda install -c conda-forge wordcloud
+wordcloud输入第三方安装包，也可以下载whl文件到本地然后本地安装
+
+ 
+
+1、先检查自己使用的python是哪个版本的
+
+python --version
+ 
+Python 3.7.1
+2、打开非正式第三方whl文件包的网站  https://www.lfd.uci.edu/~gohlke/pythonlibs/   ，下载对应版本的安装包，我这里是python3.7的windows版本，所以选择最后一个
+
+image.png
+
+ 
+
+3、下载完成以后打开cmd，用pip安装wheel 执行命令
+
+pip install wheel
+4、cmd切换到刚才下载的 wordcloud-1.5.0-cp37-cp37m-win_amd64.whl   目录，然后执行命令
+
+ 
+
+pip install wordcloud-1.5.0-cp37-cp37m-win_amd64.whl
+　　
+
+
+
+ 
+
+如图，证明安装成功
+
+ 
+
+使用方法
+ 
+
+简单实例讲解：
+
+ 
+
+   with open("tmp/tag.txt", encoding="utf-8") as file:
+            # 数据文件
+            txt = file.read()
+            # 如果数据文件中包含的有中文的话，font_path必须指定字体，否则中文会乱码
+            # collocations：是否包括两个词的搭配，默认为True，如果为true的时候会有
+            # 重复的数据，这里我不需要重复数据，所以设置为False
+            # width 幕布的宽度，height 幕布的高度
+            # max_words 要显示的词的最大个数
+            # generate 读取文本文件
+            wordcloud = WordCloud(font_path="C:/Windows/Fonts/simfang.ttf", 
+            											collocations=False,
+                                  background_color="black", 
+                                  width=800, 
+                                  height=600, 
+                                  max_words=100).generate(txt)
+            # 生成图片
+            image = wordcloud.to_image()
+            # 展示图片
+            image.show()
+            # 写入文件
+            wordcloud.to_file("tmp/tag.jpg")
+　　
+
+更多官方示例讲解
+
+ 
+
+https://github.com/amueller/word_cloud/blob/master/examples/a_new_hope.py
