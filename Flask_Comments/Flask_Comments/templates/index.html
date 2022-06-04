@@ -1,0 +1,525 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    <!-- top tiles -->
+    <div class="row tile_count">
+        <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>用户总数</span>
+            <div id="cnt_person" class="count"></div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i>男性</span>
+            <div id="cnt_male" class="count"></div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>女性</span>
+            <div id="cnt_female" class="count green"></div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>冰箱评论数</span>
+            <div id="cnt_bx" class="count"></div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>奶粉评论数</span>
+            <div id="cnt_nf" class="count"></div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-4 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i>留香珠评论数</span>
+            <div id="cnt_lxz" class="count"></div>
+        </div>
+    </div>
+    <!-- /top tiles -->
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="dashboard_graph">
+
+                <div class="row x_title">
+                    <div class="col-md-6">
+                        <h3>冰箱评论词频统计</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div id="main_bx" style="width: 80%;height:500px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart_bx = echarts.init(document.getElementById('main_bx'));
+
+                        // 指定图表的配置项和数据
+                        var option = {
+                            color: ['#3398DB'],
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: [],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    }
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '直接访问',
+                                    type: 'bar',
+                                    barWidth: '60%',
+                                    data: []
+                                }
+                            ]
+                        };
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart_bx.setOption(option);
+
+
+
+
+                    </script>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>词语</th>
+                                    <th>次数</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statistics_bx"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="dashboard_graph">
+
+                <div class="row x_title">
+                    <div class="col-md-6">
+                        <h3>奶粉评论词频统计</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div id="main_nf" style="width: 80%;height:500px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart_nf = echarts.init(document.getElementById('main_nf'));
+
+                        // 指定图表的配置项和数据
+                        var option = {
+                            color: ['#3398DB'],
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: [],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    }
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '直接访问',
+                                    type: 'bar',
+                                    barWidth: '60%',
+                                    data: []
+                                }
+                            ]
+                        };
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart_nf.setOption(option);
+                    </script>
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>词语</th>
+                                    <th>次数</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statistics_nf"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="dashboard_graph">
+
+                <div class="row x_title">
+                    <div class="col-md-6">
+                        <h3>留香珠评论词频统计</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div id="main_lxz" style="width: 80%;height:500px;"></div>
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart_lxz = echarts.init(document.getElementById('main_lxz'));
+
+                        // 指定图表的配置项和数据
+                        var option = {
+                            color: ['#3398DB'],
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: [
+                                {
+                                    type: 'category',
+                                    data: [],
+                                    axisTick: {
+                                        alignWithLabel: true
+                                    }
+                                }
+                            ],
+                            yAxis: [
+                                {
+                                    type: 'value'
+                                }
+                            ],
+                            series: [
+                                {
+                                    name: '直接访问',
+                                    type: 'bar',
+                                    barWidth: '60%',
+                                    data: []
+                                }
+                            ]
+                        };
+
+                        // 使用刚指定的配置项和数据显示图表。
+                        myChart_lxz.setOption(option);
+                    </script>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>词语</th>
+                                    <th>次数</th>
+                                </tr>
+                            </thead>
+                            <tbody id="statistics_lxz"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/getCommentCount',
+            type: 'get',
+            success: function (d) {
+                $('#cnt_bx').text(d[0][1].toString())
+                $('#cnt_nf').text(d[1][1].toString())
+                $('#cnt_lxz').text(d[2][1].toString())
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+        $.ajax({
+            url: '/getUserCount',
+            type: 'get',
+            success: function (d) {
+                $('#cnt_person').text(d[0][1] + d[1][1])
+                $('#cnt_female').text(d[0][1])
+                $('#cnt_male').text(d[1][1])
+            },
+            error: function (e) {
+                console.log(e);
+            },
+        });
+
+        //冰箱评论数据统计
+        $.ajax({
+            url: '/cipin/冰箱',
+            type: 'get',
+            success: function (d) {
+                //console.log(d.word_list)
+                //console.log(d.cnt_list)
+                //console.log(d.statistics_list)
+                //更新echart元素
+                // 基于准备好的dom，初始化echarts实例
+                //var myChart = echarts.init(document.getElementById('main11'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    color: ['#3398DB'],
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: d.word_list,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '直接访问',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: d.cnt_list
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart_bx.setOption(option);
+
+                //填充统计表
+                var arr = d.statistics_list
+                $('#statistics_bx').html('')
+                for (var i = 0; i < arr.length; i++) {
+                    $('#statistics_bx').append('<tr><td>'+ arr[i][0] +'</td><td>'+ arr[i][1] +'</td><td>' +arr[i][2]+ '</td></tr >')
+                }
+                    
+            },
+            error: function (e) {
+                //console.log(e)
+            },
+        });
+
+
+        //奶粉评论数据统计
+        $.ajax({
+            url: '/cipin/奶粉',
+            type: 'get',
+            success: function (d) {
+                //console.log(d.word_list)
+                //console.log(d.cnt_list)
+                //console.log(d.statistics_list)
+                //更新echart元素
+                // 基于准备好的dom，初始化echarts实例
+                //var myChart = echarts.init(document.getElementById('main11'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    color: ['#3398DB'],
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: d.word_list,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '直接访问',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: d.cnt_list
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart_nf.setOption(option);
+
+                //填充统计表
+                var arr = d.statistics_list
+                $('#statistics_nf').html('')
+                for (var i = 0; i < arr.length; i++) {
+                    $('#statistics_nf').append('<tr><td>' + arr[i][0] + '</td><td>' + arr[i][1] + '</td><td>' + arr[i][2] + '</td></tr >')
+                }
+
+            },
+            error: function (e) {
+                //console.log(e)
+            },
+        });
+
+
+
+        //留香珠评论数据统计
+        $.ajax({
+            url: '/cipin/留香珠',
+            type: 'get',
+            success: function (d) {
+                //console.log(d.word_list)
+                //console.log(d.cnt_list)
+                //console.log(d.statistics_list)
+                //更新echart元素
+                // 基于准备好的dom，初始化echarts实例
+                //var myChart = echarts.init(document.getElementById('main11'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    color: ['#3398DB'],
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: d.word_list,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '直接访问',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: d.cnt_list
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart_lxz.setOption(option);
+
+                //填充统计表
+                var arr = d.statistics_list
+                $('#statistics_lxz').html('')
+                for (var i = 0; i < arr.length; i++) {
+                    $('#statistics_lxz').append('<tr><td>' + arr[i][0] + '</td><td>' + arr[i][1] + '</td><td>' + arr[i][2] + '</td></tr >')
+                }
+
+            },
+            error: function (e) {
+                //console.log(e)
+            },
+        });
+    })
+</script>
+
+
+
+
+
+{% endblock %}

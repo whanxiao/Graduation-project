@@ -1,0 +1,108 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+
+    <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="datatable_filter" class="dataTables_filter">
+                    <label>
+                        <div class="col-sm-12">
+                            <select class="form-control" id="commodity" onchange="commodityChange();">
+                                <option value="">商品选择：</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 254px;">商品名称</th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 401px;">评论内容</th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189px;">用户</th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 110px;">评论时间</th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 110px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for foo in index_list %}
+                        <tr role="row" class="odd">
+                            <td class="sorting_1">{{foo.comname}}</td>
+                            <td>{{foo.content}}</td>
+                            <td>{{foo.username}}</td>
+                            <td>{{foo.create_time}}</td>
+                            <td>
+                                <a class='btn btn-xs red' onclick="confirm_del({{foo.id}})" + title='删除'><span class='glyphicon glyphicon-remove'></span></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
+                    <ul class="pagination">
+                        {{ html|safe }}
+                        <!--<li class="paginate_button previous disabled" id="datatable_previous"><a href="#" aria-controls="datatable" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="datatable" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="datatable" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="datatable_next"><a href="#" aria-controls="datatable" data-dt-idx="7" tabindex="0">Next</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/commodity',
+            type:'get',
+            success: function (d) {
+                var arr = d
+                var selectId = '{{comid}}'
+                console.log(selectId)
+                for (var i = 0; i < arr.length; i++) {
+                    console.log(arr[i].id)
+                    if (parseInt(selectId) == arr[i].id) {
+                        $('#commodity').append('<option value="' + arr[i].id + '"  selected="selected">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                    }
+                    else {
+                        $('#commodity').append('<option value="' + arr[i].id + '">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                    }
+                }
+            },
+            error: function (e) {
+                console.log(e)
+            },
+        })
+    })
+    
+
+
+    function confirm_del(id) {
+        if (window.confirm("确定删除?")) {
+            window.location.href = '/comment_del/' + id;
+        }
+    }
+
+
+    function commodityChange() {
+        var commodityId = $('#commodity').val()
+        window.location.href = '/comment/' + commodityId;
+    }
+
+</script>
+
+    {% endblock %}

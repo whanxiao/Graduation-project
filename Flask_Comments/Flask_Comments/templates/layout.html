@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>笑笑网管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/custom.min.css" />
+
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <script src="/static/scripts/echarts.min.js"></script>
+    <script src="/static/scripts/jquery-1.10.2.min.js"></script>
+
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3></h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="{{ url_for('home') }}"><i class="fa fa-home"></i> 首页 <span class="fa fa-chevron-down"></span></a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('comment') }}"><i class="fa fa-edit"></i> 评论管理 <span class="fa fa-chevron-down"></span></a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('user') }}"><i class="fa fa-desktop"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('commentVisualization') }}"><i class="fa fa-table"></i> 评论可视化 <span class="fa fa-chevron-down"></span></a>
+
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('userPortrait') }}"><i class="fa fa-bar-chart-o"></i> 用户画像 <span class="fa fa-chevron-down"></span></a>
+
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_col" role="main">
+                <div class="container body-content">
+                    {% block content %}{% endblock %}
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/scripts/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+

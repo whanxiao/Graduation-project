@@ -1,0 +1,313 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+
+    <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="datatable_filter" class="dataTables_filter">
+                    <label>
+                        <div class="col-sm-12">
+                            <h3>用户画像</h3>
+
+                            <select class="form-control" id="commodity" onchange="commodityChange();">
+                                <option value="">商品选择：</option>
+                            </select>
+                        </div>
+                    </label>
+                    <button class="btn btn-success" onclick="generateUserPortrait()">生成用户画像</button>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="dashboard_graph">
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div id="main_sex" style="width: 80%;height:500px;"></div>
+                        <script type="text/javascript">
+                            // 基于准备好的dom，初始化echarts实例
+                            var myChart_sex = echarts.init(document.getElementById('main_sex'));
+
+                            // 指定图表的配置项和数据
+                            option = {
+                                title: {
+                                    text: '分类统计饼图',
+                                    subtext: '性别',
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item'
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left'
+                                },
+                                series: [
+                                    {
+                                        name: 'Access From',
+                                        type: 'pie',
+                                        radius: '50%',
+                                        data: [
+                                            {},
+                                            {},
+                                        ],
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }
+                                ]
+                            };
+
+                            // 使用刚指定的配置项和数据显示图表。
+                            myChart_sex.setOption(option);
+
+
+
+
+                        </script>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="datatable_filter" class="dataTables_filter">
+                    <label>
+                        <div class="col-sm-12">
+                            <h3>评论时间曲线图</h3>
+
+                            <select class="form-control" id="commodity2" onchange="commodityChange2();">
+                                <option value="">商品选择：</option>
+                            </select>
+                        </div>
+                    </label>
+                    <button class="btn btn-success" onclick="generateCommentsTimePortrait()">生成评论时间曲线</button>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="dashboard_graph">
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div id="main_time" style="width: 80%;height:500px;"></div>
+                        <script type="text/javascript">
+                            // 基于准备好的dom，初始化echarts实例
+                            var myChart_time = echarts.init(document.getElementById('main_time'));
+
+                            option = {
+                                title: {
+                                    text: '评论时间折线图',
+                                    subtext: '按日期汇总',
+                                    left: 'center'
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                                    data: []
+                                },
+                                yAxis: {
+                                    type: 'value'
+                                },
+                                series: [
+                                    {
+                                        //data: [150, 230, 224, 218, 135, 147, 260],
+                                        data: [],
+                                        type: 'line'
+                                    }
+                                ]
+                            };
+
+                            // 使用刚指定的配置项和数据显示图表。
+                            myChart_time.setOption(option);
+
+
+
+
+                        </script>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/commodity',
+            type:'get',
+            success: function (d) {
+                var arr = d
+                var selectId = '{{comid}}'
+                for (var i = 0; i < arr.length; i++) {
+                    if (parseInt(selectId) == arr[i].id) {
+                        $('#commodity').append('<option value="' + arr[i].id + '"  selected="selected">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                        $('#commodity2').append('<option value="' + arr[i].id + '"  selected="selected">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                    }
+                    else {
+                        $('#commodity').append('<option value="' + arr[i].id + '">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                        $('#commodity2').append('<option value="' + arr[i].id + '">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                    }
+                }
+            },
+            error: function (e) {
+                console.log(e)
+            },
+        })
+    })
+
+
+    function generateUserPortrait() {
+        // 指定图表的配置项和数据
+        // 指定图表的配置项和数据
+        option = {
+            title: {
+                text: '分类统计饼图',
+                subtext: '性别',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Access From',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        {},
+                        {},
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart_sex.setOption(option);
+
+        var commodityId = $('#commodity').val()
+
+        //数据统计
+        $.ajax({
+            url: '/generateUserPortrait',
+            data: {
+                'commodityId': commodityId
+            },
+            type: 'post',
+            success: function (d) {
+                // 指定图表的配置项和数据
+                option = {
+                    title: {
+                        text: '分类统计饼图',
+                        subtext: '性别',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left'
+                    },
+                    series: [
+                        {
+                            name: 'Access From',
+                            type: 'pie',
+                            radius: '50%',
+                            data: d,
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart_sex.setOption(option);
+
+            },
+            error: function (e) {
+                //console.log(e)
+            },
+        });
+
+    }
+
+
+    function generateCommentsTimePortrait() {
+        var commodityId2 = $('#commodity2').val()
+
+        //数据统计
+        $.ajax({
+            url: '/generateCommentsTimePortrait',
+            data: {
+                'commodityId2': commodityId2
+            },
+            type: 'post',
+            success: function (d) {
+                // 指定图表的配置项和数据
+                option = {
+                    xAxis: {
+                        type: 'category',
+                        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        data: d.x
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            //data: [150, 230, 224, 218, 135, 147, 260],
+                            data: d.y,
+                            type: 'line'
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart_time.setOption(option);
+
+            },
+            error: function (e) {
+                //console.log(e)
+            },
+        });
+
+    }
+
+</script>
+
+    {% endblock %}

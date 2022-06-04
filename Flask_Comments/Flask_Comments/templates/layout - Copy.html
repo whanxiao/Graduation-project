@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} 笑笑网管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <script src="/static/scripts/echarts.min.js"></script>
+    <script src="/static/scriptss/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="col-md-2 col-sm-4 col-xs-6 left_col">
+        <div class="left_col scroll-view">
+            <!-- 侧边栏菜单 -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                <div class="menu_section active">
+                    <h3>评论管理系统</h3>
+                    <ul class="nav side-menu" style="">
+                        <li><a href="{{ url_for('home') }}">首页</a></li>
+                        <li><a href="{{ url_for('comment') }}">评论管理</a></li>
+                        <li><a href="{{ url_for('user') }}">用户管理</a></li>
+                        <li><a href="{{ url_for('commentVisualization') }}">评论可视化</a></li>
+                        <li><a href="{{ url_for('userPortrait') }}">用户画像</a></li>                    
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /sidebar menu -->
+         
+        </div>
+    </div>
+
+
+    <!-- page content -->
+    <div class="right_col" role="main" style="min-height: 1615px;">
+
+        <div class="container body-content">
+            {% block content %}{% endblock %}
+            <hr />
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

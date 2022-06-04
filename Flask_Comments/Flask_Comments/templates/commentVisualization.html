@@ -1,0 +1,271 @@
+﻿{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+
+    <div id="datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="datatable_filter" class="dataTables_filter">
+                    <label>
+                        <div class="col-sm-12">
+                            <h3>词频统计</h3>
+
+                            <select class="form-control" id="commodity" onchange="commodityChange();">
+                                <option value="">商品选择：</option>
+                            </select>
+                        </div>
+                    </label>
+                    <button class="btn btn-success" onclick="generateWordCloud()">生成词云</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <label for="sw">去停用词补充(用逗号,间隔):</label>
+                    <textarea id="sw" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="stopwords" data-parsley-validation-threshold="10"></textarea>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <img id="cloundImg" src="{{ url_for('static', filename='wordcloud.png')}}" width="640" height="480" style="display:none;" />
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="dashboard_graph">
+
+                    <div class="row x_title">
+                        <div class="col-md-6">
+                            <h3>词频统计</h3>
+                            <button class="btn btn-success" onclick="generateCiPin()">生成词频统计柱状图</button>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div id="main_cp" style="width: 80%;height:500px;"></div>
+                        <script type="text/javascript">
+                            // 基于准备好的dom，初始化echarts实例
+                            var myChart_cp = echarts.init(document.getElementById('main_cp'));
+
+                            // 指定图表的配置项和数据
+                            var option = {
+                                color: ['#3398DB'],
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                    }
+                                },
+                                grid: {
+                                    left: '3%',
+                                    right: '4%',
+                                    bottom: '3%',
+                                    containLabel: true
+                                },
+                                xAxis: [
+                                    {
+                                        type: 'category',
+                                        data: [],
+                                        axisTick: {
+                                            alignWithLabel: true
+                                        }
+                                    }
+                                ],
+                                yAxis: [
+                                    {
+                                        type: 'value'
+                                    }
+                                ],
+                                series: [
+                                    {
+                                        name: '直接访问',
+                                        type: 'bar',
+                                        barWidth: '60%',
+                                        data: []
+                                    }
+                                ]
+                            };
+
+                            // 使用刚指定的配置项和数据显示图表。
+                            myChart_cp.setOption(option);
+
+
+
+
+                        </script>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/commodity',
+            type:'get',
+            success: function (d) {
+                var arr = d
+                var selectId = '{{comid}}'
+                for (var i = 0; i < arr.length; i++) {
+                    if (parseInt(selectId) == arr[i].id) {
+                        $('#commodity').append('<option value="' + arr[i].id + '"  selected="selected">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                    }
+                    else {
+                        $('#commodity').append('<option value="' + arr[i].id + '">' + arr[i].catename + ' | ' + arr[i].comname + '</option>')
+                    }
+                }
+            },
+            error: function (e) {
+                console.log(e)
+            },
+        })
+    })
+
+    function generateWordCloud() {
+        $('#cloundImg').attr('style', 'display:none;')
+        var commodityId = $('#commodity').val()
+        var sw_str = $('#sw').val()
+        $.ajax({
+            //url: '/generateWordCloud/' + commodityId + '/' + sw_str,
+            url: '/generateWordCloud',
+            data: {
+                'commodityId': commodityId,
+                'sw_str': sw_str
+            },
+            type: 'post',
+            success: function (d) {
+                console.log(d);
+                $("#cloundImg").attr("src", function () { return this.src + "?" });
+                $('#cloundImg').attr('style', 'display:block;')
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        })
+    }
+
+
+    function generateCiPin() {
+        // 指定图表的配置项和数据
+        var option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: [],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: []
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart_cp.setOption(option);
+
+        var commodityId = $('#commodity').val()
+        var sw_str = $('#sw').val()
+
+        //数据统计
+        $.ajax({
+            url: '/generateCiPin',
+            data: {
+                'commodityId': commodityId,
+                'sw_str': sw_str
+            },
+            type: 'post',
+            success: function (d) {
+                // 指定图表的配置项和数据
+                var option = {
+                    color: ['#3398DB'],
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: d.word_list,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '直接访问',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: d.cnt_list
+                        }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart_cp.setOption(option);
+
+            },
+            error: function (e) {
+                //console.log(e)
+            },
+        });
+
+    }
+
+</script>
+
+    {% endblock %}
